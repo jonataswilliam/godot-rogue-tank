@@ -3,7 +3,6 @@
 [ext_resource path="res://scripts/Bullet.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bulletRed1_outline.png" type="Texture" id=2]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.30079
 height = 6.02106

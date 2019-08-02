@@ -7,7 +7,6 @@
 [ext_resource path="res://sprites/shotLarge.png" type="Texture" id=5]
 [ext_resource path="res://sprites/shotOrange.png" type="Texture" id=6]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "fire"
 length = 0.4
