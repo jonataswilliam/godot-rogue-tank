@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Tank.gd" type="Script" id=1]
-[ext_resource path="res://sprites/tankBody_blue.png" type="Texture" id=2]
+[ext_resource path="res://sprites/tankBody_bigRed.png" type="Texture" id=2]
 [ext_resource path="res://sprites/tankDark_barrel1_outline.png" type="Texture" id=3]
 [ext_resource path="res://sprites/shotRed.png" type="Texture" id=4]
 [ext_resource path="res://sprites/shotLarge.png" type="Texture" id=5]
@@ -48,6 +48,7 @@ tracks/2/keys = {
 }
 
 [node name="Tank" type="KinematicBody2D"]
+collision_mask = 6
 script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -65,12 +66,13 @@ texture = ExtResource( 3 )
 offset = Vector2( 0, -8.388 )
 
 [node name="muzzle" type="Position2D" parent="barrel"]
-position = Vector2( 29.7289, -0.135632 )
+position = Vector2( 32.8845, -0.135632 )
 
 [node name="fire" type="Sprite" parent="barrel"]
 visible = false
 position = Vector2( 41, 0 )
 rotation = 4.71239
+z_index = 1
 texture = ExtResource( 4 )
 
 [node name="anim" type="AnimationPlayer" parent="barrel"]

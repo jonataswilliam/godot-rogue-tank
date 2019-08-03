@@ -1,7 +1,7 @@
 extends Area2D
 
 var dir = Vector2(0, -1) setget set_dir
-var velocity = 250
+var velocity = 400
 
 func _ready():
 	pass # Replace with function body.
