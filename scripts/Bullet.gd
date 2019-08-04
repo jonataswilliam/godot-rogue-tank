@@ -1,6 +1,6 @@
 extends Area2D
 
-const DIST_MAX = 300
+var dist_max = 300
 
 var dir = Vector2(0, -1) setget set_dir
 onready var init_pos = global_position
@@ -13,10 +13,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if live:	
-		if global_position.distance_to(init_pos) >= DIST_MAX:
+		if global_position.distance_to(init_pos) >= dist_max:
 			auto_destroy()	
-		
-		
 	
 		translate(dir * velocity * delta)
 	
@@ -33,8 +31,10 @@ func auto_destroy():
 	$sprite.visible = false
 	$anim_auto_destroy.play("destroyed")
 	live = false	
-	monitorable = false
-	monitoring = false
+	call_deferred("set_monitorable", false)
+#	monitorable = false
+	call_deferred("set_monitoring", false)
+#	monitoring = false
 	yield($anim_auto_destroy, "animation_finished")
 	queue_free()
 

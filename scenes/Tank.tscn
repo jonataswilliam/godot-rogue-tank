@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Tank.gd" type="Script" id=1]
 [ext_resource path="res://sprites/tankBody_bigRed.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://sprites/shotRed.png" type="Texture" id=4]
 [ext_resource path="res://sprites/shotLarge.png" type="Texture" id=5]
 [ext_resource path="res://sprites/shotOrange.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Sight.tres.gd" type="Script" id=7]
+[ext_resource path="res://sprites/specialBarrel4_outline.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fire"
@@ -47,7 +49,28 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "shootImpact"
+length = 0.4
+
+[sub_resource type="Animation" id=3]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.420449, 1 ),
+"update": 0,
+"values": [ Vector2( -19.0885, 0 ), Vector2( 0, 0 ) ]
+}
+
 [node name="Tank" type="KinematicBody2D"]
+z_index = 20
 collision_mask = 6
 script = ExtResource( 1 )
 
@@ -55,7 +78,7 @@ script = ExtResource( 1 )
 polygon = PoolVector2Array( -12.8442, -17.9845, -17.0207, -12.4159, -17.0207, 12.4442, -11.8498, 17.9134, 11.817, 17.9134, 16.9879, 14.8308, 16.9879, -14.0069, 12.6125, -18.084 )
 
 [node name="sprite" type="Sprite" parent="."]
-rotation = 1.5708
+rotation = -1.5708
 texture = ExtResource( 2 )
 
 [node name="barrel" type="Node2D" parent="."]
@@ -78,3 +101,34 @@ texture = ExtResource( 4 )
 [node name="anim" type="AnimationPlayer" parent="barrel"]
 playback_speed = 2.0
 anims/fire = SubResource( 1 )
+anims/shootImpact = SubResource( 2 )
+
+[node name="sight" type="Node2D" parent="barrel"]
+position = Vector2( 128.204, 0 )
+script = ExtResource( 7 )
+
+[node name="anim_barrel" type="AnimationPlayer" parent="barrel"]
+anims/shoot = SubResource( 3 )
+
+[node name="loadTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="machineGun" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sprite" type="Sprite" parent="machineGun"]
+position = Vector2( 19.7356, 14.2355 )
+rotation = -1.5708
+z_index = 21
+texture = ExtResource( 8 )
+
+[node name="mg_muzzle" type="Position2D" parent="machineGun"]
+position = Vector2( 47.2359, 16.1767 )
+
+[node name="shoot_interval" type="Timer" parent="machineGun"]
+wait_time = 0.1
+one_shot = true
+[connection signal="timeout" from="loadTimer" to="." method="_on_loadTimer_timeout"]
+[connection signal="timeout" from="machineGun/shoot_interval" to="." method="_on_shoot_interval_timeout"]

@@ -9,29 +9,30 @@
 [ext_resource path="res://sprites/explosion4.png" type="Texture" id=7]
 [ext_resource path="res://sprites/explosion5.png" type="Texture" id=8]
 
-[sub_resource type="Gradient" id=6]
-offsets = PoolRealArray( 0, 0.237037, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.125926, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.572549, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=1]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0.368 ), 0.0, 0.0, 0, 0, Vector2( 0.98944, 0.632 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 10.3333
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.3
-scale_curve = SubResource( 3 )
-color_ramp = SubResource( 1 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="CapsuleShape2D" id=5]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 4.30079
 height = 6.02106
 
@@ -75,12 +76,12 @@ position = Vector2( -6.68714, 0 )
 amount = 20
 lifetime = 0.5
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="shape" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="sprite" type="Sprite" parent="."]
 rotation = 1.5708
